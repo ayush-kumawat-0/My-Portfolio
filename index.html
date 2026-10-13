@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayush Kumawat — Aspiring DevOps Engineer</title>
+    <meta name="description" content="MCA student and aspiring DevOps engineer building a foundation in Linux, Shell Scripting, Python and Git through practical projects." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <script>
+    (() => {
+      const key = "ayush-portfolio-scroll";
+      try { history.scrollRestoration = "manual"; } catch (_) {}
+      const restore = () => {
+        try {
+          const y = Number(sessionStorage.getItem(key) || localStorage.getItem(key));
+          if (Number.isFinite(y) && y > 0) window.scrollTo(0, y);
+        } catch (_) {}
+      };
+      const save = () => {
+        try {
+          const y = String(Math.round(window.scrollY));
+          sessionStorage.setItem(key, y);
+          localStorage.setItem(key, y);
+        } catch (_) {}
+      };
+      window.addEventListener("scroll", save, { passive: true });
+      window.addEventListener("beforeunload", save);
+      window.addEventListener("pagehide", save);
+      window.addEventListener("pageshow", restore);
+      window.addEventListener("load", restore);
+      restore();
+      requestAnimationFrame(restore);
+      requestAnimationFrame(() => requestAnimationFrame(restore));
+      setTimeout(restore, 100);
+      setTimeout(restore, 300);
+      setTimeout(restore, 800);
+    })();
+  </script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
