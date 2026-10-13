@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  🔗 <a href="YOUR-PORTFOLIO-LINK">Visit My Portfolio →</a>
+</p>
+
+<p align="center">
   <a href="https://github.com/ayush-kumawat-0">GitHub</a>
   &nbsp; • &nbsp;
   <a href="https://www.linkedin.com/in/ayushhkumawat/">LinkedIn</a>
@@ -60,7 +64,6 @@ AI tools were used as a **development assistant** during the creation of this po
 
 ---
 
-## 🚀 Visit My Portfolio
 
 <p align="center">
 
