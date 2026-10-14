@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  🔗 <a href="YOUR-PORTFOLIO-LINK">Visit My Portfolio →</a>
+  🔗 <a href="https://my-portfolio1a.vercel.app/">Visit My Portfolio →</a>
 </p>
 
 <p align="center">
