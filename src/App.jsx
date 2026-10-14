@@ -10,6 +10,15 @@ import ScrollProgress from "./components/ScrollProgress";
 import MeteorShower from "./components/MeteorShower";
 
 const SCROLL_KEY = "ayush-portfolio-scroll";
+const THEME_KEY = "ayush-portfolio-theme";
+
+function getSavedTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY) === "light" ? "light" : "dark";
+  } catch (_) {
+    return "dark";
+  }
+}
 
 function getSavedScroll() {
   const values = [
@@ -24,10 +33,15 @@ function getSavedScroll() {
 }
 
 export default function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(getSavedTheme);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (_) {
+      // Theme still applies for the current session when storage is unavailable.
+    }
   }, [theme]);
 
   useEffect(() => {

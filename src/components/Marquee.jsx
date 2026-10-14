@@ -34,7 +34,7 @@ export default function Marquee() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative z-10 w-full overflow-hidden border-y border-white/10 py-4 my-2">
+    <div className="relative z-10 w-full overflow-hidden border-y border-neutral-200 dark:border-white/10 py-4 my-2">
       <div ref={trackRef} className="flex gap-12 whitespace-nowrap w-max">
         {doubled.map((item, i) => (
           <span
@@ -46,8 +46,8 @@ export default function Marquee() {
           </span>
         ))}
       </div>
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white dark:from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white dark:from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
     </div>
   );
 }

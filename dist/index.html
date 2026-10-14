@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,12 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/assets/index-WrZtgqDa.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-apjLLZpp.css">
+    <script type="module" crossorigin src="/assets/index-B9RipDnq.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DOwKwdae.css">
   </head>
   <script>
     (() => {
+      const themeKey = "ayush-portfolio-theme";
       const key = "ayush-portfolio-scroll";
+      try {
+        const savedTheme = localStorage.getItem(themeKey);
+        document.documentElement.classList.toggle("dark", savedTheme !== "light");
+      } catch (_) {
+        document.documentElement.classList.add("dark");
+      }
       try { history.scrollRestoration = "manual"; } catch (_) {}
       const restore = () => {
         try {
