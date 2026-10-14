@@ -32,7 +32,7 @@ export default function MeteorShower() {
         }
 
         this.len   = Math.random() * 85 + 70;
-        this.speed = Math.random() * 1.8 + 1.7;
+        this.speed = Math.random() * 0.9 + 0.8;
         this.size  = Math.random() * 0.55 + 0.4;
         this.opacity = Math.random() * 0.28 + 0.24;
 

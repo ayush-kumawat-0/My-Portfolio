@@ -33,6 +33,12 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@media (pointer: coarse) {
+  .mobile-cursor {
+    opacity: 0;
+  }
+}
+
 h1,
 h2,
 h3,

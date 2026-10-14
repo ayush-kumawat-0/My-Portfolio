@@ -10,6 +10,7 @@ export default function MouseFollower() {
     const dot = dotRef.current;
 
     let mouseX = 0, mouseY = 0;
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const onMove = (e) => {
       mouseX = e.clientX;
@@ -20,6 +21,31 @@ export default function MouseFollower() {
 
       // Ring follows with lag
       gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.35, ease: "power2.out" });
+    };
+
+    const moveTouchIndicator = (x, y) => {
+      mouseX = x;
+      mouseY = y;
+      gsap.to(dot, { x: mouseX, y: mouseY, duration: 0, ease: "none" });
+      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.18, ease: "power2.out" });
+    };
+
+    const onTouchStart = (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      moveTouchIndicator(touch.clientX, touch.clientY);
+      gsap.to(cursor, { opacity: 0.85, scale: 1, duration: 0.2 });
+      gsap.to(dot, { opacity: 1, duration: 0.2 });
+    };
+
+    const onTouchMove = (e) => {
+      const touch = e.touches[0];
+      if (touch) moveTouchIndicator(touch.clientX, touch.clientY);
+    };
+
+    const onTouchEnd = () => {
+      gsap.to(cursor, { opacity: 0, duration: 0.25 });
+      gsap.to(dot, { opacity: 0, duration: 0.25 });
     };
 
     const onEnterLink = () => {
@@ -33,6 +59,12 @@ export default function MouseFollower() {
     };
 
     window.addEventListener("mousemove", onMove);
+    if (isTouchDevice) {
+      window.addEventListener("touchstart", onTouchStart, { passive: true });
+      window.addEventListener("touchmove", onTouchMove, { passive: true });
+      window.addEventListener("touchend", onTouchEnd, { passive: true });
+      window.addEventListener("touchcancel", onTouchEnd, { passive: true });
+    }
 
     const links = document.querySelectorAll("a, button");
     links.forEach((el) => {
@@ -42,6 +74,12 @@ export default function MouseFollower() {
 
     return () => {
       window.removeEventListener("mousemove", onMove);
+      if (isTouchDevice) {
+        window.removeEventListener("touchstart", onTouchStart);
+        window.removeEventListener("touchmove", onTouchMove);
+        window.removeEventListener("touchend", onTouchEnd);
+        window.removeEventListener("touchcancel", onTouchEnd);
+      }
       links.forEach((el) => {
         el.removeEventListener("mouseenter", onEnterLink);
         el.removeEventListener("mouseleave", onLeaveLink);
@@ -54,13 +92,13 @@ export default function MouseFollower() {
       {/* Outer ring */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#1A1A1A] dark:border-[#E5E5E5] pointer-events-none z-[9999] "
+        className="mobile-cursor fixed top-0 left-0 w-8 h-8 rounded-full border border-[#1A1A1A] dark:border-[#E5E5E5] pointer-events-none z-[9999] "
         style={{ transform: "translate(-50%, -50%)" }}
       />
       {/* Inner dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#F26A18] pointer-events-none z-[9999]"
+        className="mobile-cursor fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#F26A18] pointer-events-none z-[9999]"
         style={{ transform: "translate(-50%, -50%)" }}
       />
     </>
