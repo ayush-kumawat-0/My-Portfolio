@@ -26,8 +26,11 @@ export default function MouseFollower() {
     const moveTouchIndicator = (x, y) => {
       mouseX = x;
       mouseY = y;
-      gsap.to(dot, { x: mouseX, y: mouseY, duration: 0, ease: "none" });
-      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.18, ease: "power2.out" });
+      // Touch events can arrive while the page is scrolling. Positioning
+      // directly avoids queuing animations behind the scroll gesture.
+      const transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      dot.style.transform = transform;
+      cursor.style.transform = transform;
     };
 
     const onTouchStart = (e) => {
