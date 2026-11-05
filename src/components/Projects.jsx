@@ -58,27 +58,15 @@ function TerminalPreview({ href }) {
         <div className="preview-address">terminal-file-manager</div>
       </div>
 
-      <div className="terminal-screen font-mono">
+      <div className="terminal-screen font-mono whitespace-pre">
         <p>
-          <b className="text-[#f26a18]">ayush@linux</b>:
-          <span className="text-orange-300">~</span>$ ./File_manager.sh
+          <b className="text-[#f26a18]">ayush@linux</b>:<span className="text-orange-300">~</span>$ ./File_manager.sh
         </p>
 
-        <p className="text-neutral-400 mt-3">
-          ╔══════════════════════════════════════════════════════════════╗
-        </p>
-
-        <p className="text-neutral-200">
-          ║{"                    "}TERMINAL FILE MANAGER{"                    "}║
-        </p>
-
-        <p className="text-neutral-400">
-          ║{"                  "}Linux • Bash • File Tools{"                  "}║
-        </p>
-
-        <p className="text-neutral-400">
-          ╚══════════════════════════════════════════════════════════════╝
-        </p>
+        <div className="terminal-banner mt-3 text-neutral-400">
+          <p className="text-neutral-200">TERMINAL FILE MANAGER</p>
+          <p>Linux • Bash • File Tools</p>
+        </div>
 
         <p className="mt-3">
           [1] Create File &nbsp;&nbsp; [2] Copy File
@@ -129,6 +117,93 @@ function TerminalPreview({ href }) {
     </a>
   );
 }
+
+
+const AWS_DASHBOARD_URL =
+  "https://github.com/ayush-kumawat-0/AWS-CLI-Dashboard";
+
+function AWSTerminalPreview({ href }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Open AWS Automation Dashboard GitHub repository"
+      className="project-preview terminal-preview group/preview block"
+    >
+      <div className="preview-bar">
+        <span />
+        <span />
+        <span />
+        <div className="preview-address">
+          aws-cli-python-dashboard
+        </div>
+      </div>
+
+      <div className="terminal-screen font-mono whitespace-pre">
+        <p>
+          <b className="text-[#f26a18]">ayush@aws</b>:<span className="text-orange-300">~</span>$ python main.py
+        </p>
+
+        <div className="terminal-banner mt-3 text-neutral-400">
+          <p className="text-neutral-200">AWS AUTOMATION DASHBOARD</p>
+          <p>Python • AWS CLI</p>
+        </div>
+
+        <p className="mt-3 text-[#f26a18]">
+          Select an AWS Service
+        </p>
+
+        <p className="mt-2">
+          [1] EC2 Management
+          &nbsp;&nbsp; [2] S3 Management
+        </p>
+
+        <p>
+          [3] IAM Management
+          &nbsp;&nbsp; [4] Lambda Functions
+        </p>
+
+        <p>
+          [5] API Gateway
+        </p>
+
+        <p className="mt-2">
+          [6] Account Information
+        </p>
+
+        <p className="mt-2 text-neutral-400">
+          [7] Exit
+        </p>
+
+        <p className="mt-3 text-neutral-400">
+          ══════════════════════════════════════════════════════════════
+        </p>
+
+        <p className="mt-2">
+          AWS CLI Status:{" "}
+          <span className="text-green-400">● Connected</span>
+        </p>
+
+        <p>
+          Interface:{" "}
+          <span className="text-neutral-300">Python CLI</span>
+        </p>
+
+        <p className="mt-3 text-neutral-400">
+          Enter your choice (1-7) :{" "}
+          <span className="text-[#f26a18]">_</span>
+        </p>
+      </div>
+
+      <div className="preview-overlay">
+        <span>Open GitHub Repository ↗</span>
+      </div>
+    </a>
+  );
+}
+
+
 const projects = [
   {
     num: "01",
@@ -147,6 +222,15 @@ const projects = [
     tags: ["Linux", "Bash", "Shell Scripting"],
     preview: "terminal",
     href: FILE_MANAGER_URL,
+  },
+  {
+    num: "03",
+    title: "AWS Cloud Project",
+    description:
+      "A cloud project focused on building practical infrastructure and learning how AWS services work together.",
+    tags: ["AWS", "EC2", "S3", "IAM"],
+    preview: "aws",
+    href: AWS_DASHBOARD_URL,
   },
 ];
 
@@ -199,7 +283,9 @@ export default function Projects() {
               key={project.title}
               className="project-reveal grid lg:grid-cols-[1.15fr_.85fr] gap-8 lg:gap-12 items-center"
             >
-              {project.preview === "browser" ? (
+              {project.preview === "aws" ? (
+                <AWSTerminalPreview href={project.href} />
+              ) : project.preview === "browser" ? (
                 <BrowserPreview href={project.href} />
               ) : (
                 <TerminalPreview href={project.href} />
@@ -213,7 +299,7 @@ export default function Projects() {
 
                   <span className="h-px w-10 bg-neutral-300 dark:bg-white/15" />
 
-                  {project.preview === "browser" ? (
+                  {project.href && project.preview === "browser" ? (
                     <a
                       href={project.href}
                       target="_blank"
@@ -222,7 +308,7 @@ export default function Projects() {
                     >
                       Live ↗
                     </a>
-                  ) : (
+                  ) : project.href ? (
                     <a
                       href={project.href}
                       target="_blank"
@@ -231,7 +317,7 @@ export default function Projects() {
                     >
                       GitHub ↗
                     </a>
-                  )}
+                  ) : null}
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-medium tracking-tight">
